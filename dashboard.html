@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScaleUp Chennai | Admin Dashboard</title>
+  
+  <link rel="stylesheet" href="style.css?v=1.0.2">
+  <link rel="stylesheet" href="responsive.css">
+  
+  <!-- ChartJS CDN for Visual Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Loading Screen overlay -->
+  <div class="loader-overlay" id="dashboardLoader">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Mobile Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Main Dashboard Layout -->
+  <div class="admin-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="logo" style="margin-bottom: 20px;">
+        <div class="logo-icon">SU</div>
+        <div class="logo-text">
+          <span class="logo-title">ScaleUp Chennai</span>
+          <span class="logo-subtitle">Admin Panel</span>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-item active" id="menu-overview">
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="9"></rect>
+              <rect x="14" y="3" width="7" height="5"></rect>
+              <rect x="14" y="12" width="7" height="9"></rect>
+              <rect x="3" y="16" width="7" height="5"></rect>
+            </svg>
+            Dashboard
+          </a>
+        </li>
+        <li class="sidebar-item" id="menu-registrations">
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            Registrations
+          </a>
+        </li>
+      </ul>
+
+      <!-- Bottom controls (Theme, Logout) -->
+      <div style="margin-top: auto; display: flex; flex-direction: column; gap: 16px;">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle-btn" style="width: 100%; border-radius: 8px; justify-content: flex-start; padding: 12px 16px;" aria-label="Toggle Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 14px;">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 14px;">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+          Toggle Theme
+        </button>
+
+        <button class="btn btn-secondary" id="btnLogout" style="width: 100%; border-radius: 8px; justify-content: flex-start; padding: 12px 16px; border: 1px solid var(--border-glass);">
+          🚪 Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Content -->
+    <main class="main-content">
+      
+      <!-- Top header bar -->
+      <div class="dashboard-header">
+        <div class="dashboard-title">
+          <h2 id="pageTitle">Dashboard Overview</h2>
+          <p id="pageSubtitle">Real-time candidate metrics and registration trends</p>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <!-- Mobile Sidebar Toggle -->
+          <button class="hamburger-btn" id="mobileMenuBtn" style="display: none;">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- VIEW 1: OVERVIEW SCREEN -->
+      <div id="view-overview">
+        <!-- Metric Cards -->
+        <div class="metrics-grid">
+          <!-- Total -->
+          <div class="metric-card glass-card">
+            <div class="metric-icon-box" style="background: linear-gradient(135deg, var(--primary), #0088cc);">📊</div>
+            <div class="metric-info">
+              <span class="metric-value" id="cardTotal">0</span>
+              <span class="metric-label">Total</span>
+            </div>
+          </div>
+          <!-- Today -->
+          <div class="metric-card glass-card">
+            <div class="metric-icon-box" style="background: linear-gradient(135deg, var(--accent), #ff5d00);">🔥</div>
+            <div class="metric-info">
+              <span class="metric-value" id="cardToday">0</span>
+              <span class="metric-label">Today</span>
+            </div>
+          </div>
+          <!-- Pending Follow-ups -->
+          <div class="metric-card glass-card">
+            <div class="metric-icon-box" style="background: linear-gradient(135deg, #f59e0b, #d97706);">⏳</div>
+            <div class="metric-info">
+              <span class="metric-value" id="cardPending">0</span>
+              <span class="metric-label">Pending Follow-ups</span>
+            </div>
+          </div>
+          <!-- Online -->
+          <div class="metric-card glass-card">
+            <div class="metric-icon-box" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6);">💻</div>
+            <div class="metric-info">
+              <span class="metric-value" id="cardOnline">0</span>
+              <span class="metric-label">Online</span>
+            </div>
+          </div>
+          <!-- Offline -->
+          <div class="metric-card glass-card">
+            <div class="metric-icon-box" style="background: linear-gradient(135deg, #10b981, #059669);">📍</div>
+            <div class="metric-info">
+              <span class="metric-value" id="cardOffline">0</span>
+              <span class="metric-label">Offline</span>
+            </div>
+          </div>
+          <!-- Placement Request -->
+          <div class="metric-card glass-card">
+            <div class="metric-icon-box" style="background: linear-gradient(135deg, #ef4444, #dc2626);">👔</div>
+            <div class="metric-info">
+              <span class="metric-value" id="cardPlacement">0</span>
+              <span class="metric-label">Placement Req</span>
+            </div>
+          </div>
+          <!-- Internship Request -->
+          <div class="metric-card glass-card">
+            <div class="metric-icon-box" style="background: linear-gradient(135deg, #34d399, #059669);">📝</div>
+            <div class="metric-info">
+              <span class="metric-value" id="cardInternship">0</span>
+              <span class="metric-label">Internship Req</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Layout Row 1 (Temporal trends) -->
+        <div class="charts-grid">
+          <div class="chart-card glass-card">
+            <h4>Daily Registration Activity</h4>
+            <div class="chart-container">
+              <canvas id="chartDaily"></canvas>
+            </div>
+          </div>
+          <div class="chart-card glass-card">
+            <h4>Monthly Enrollments</h4>
+            <div class="chart-container">
+              <canvas id="chartMonthly"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Layout Row 2 (Metrics Segment) -->
+        <div class="charts-row-3">
+          <div class="chart-card glass-card">
+            <h4>Preferred Language</h4>
+            <div class="chart-container">
+              <canvas id="chartLanguage"></canvas>
+            </div>
+          </div>
+          <div class="chart-card glass-card">
+            <h4>Course Study Preferences</h4>
+            <div class="chart-container">
+              <canvas id="chartTrainingMode"></canvas>
+            </div>
+          </div>
+          <div class="chart-card glass-card">
+            <h4>Educational Qualifications</h4>
+            <div class="chart-container">
+              <canvas id="chartQualification"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-card glass-card" style="grid-column: span 2;">
+            <h4>Current Professional Status</h4>
+            <div class="chart-container">
+              <canvas id="chartStatus"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 2: REGISTRATIONS LIST VIEW -->
+      <div id="view-registrations" style="display: none;">
+        <div class="data-card glass-card">
+          
+          <!-- Filter and Search Toolbar -->
+          <div class="filter-bar">
+            
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="tableSearch" class="form-input" placeholder="Search by name, reg ID, mobile...">
+            </div>
+
+            <div class="filter-options">
+              <!-- Date Range Filter -->
+              <select id="filterDate" class="filter-select">
+                <option value="all">All Dates</option>
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+              </select>
+
+              <!-- Training Mode Filter -->
+              <select id="filterMode" class="filter-select">
+                <option value="all">All Modes</option>
+                <option value="online">Online</option>
+                <option value="offline">Offline</option>
+                <option value="either">Either</option>
+              </select>
+
+              <!-- Status Filter -->
+              <select id="filterStatus" class="filter-select">
+                <option value="all">All Statuses</option>
+                <option value="New">New</option>
+                <option value="Contacted">Contacted</option>
+                <option value="Joined">Joined</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+
+              <!-- Export Data Buttons -->
+              <button class="btn btn-secondary" id="btnExportCSV" style="padding: 10px 16px; border-radius: 8px;">📊 Export CSV</button>
+              <button class="btn btn-secondary" id="btnPrintTable" style="padding: 10px 16px; border-radius: 8px;">🖨️ Print List</button>
+            </div>
+          </div>
+
+          <!-- Candidates Table -->
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Reg ID</th>
+                  <th>Full Name</th>
+                  <th>Mobile Number</th>
+                  <th>Locality</th>
+                  <th>Training Mode</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="registrationsTableBody">
+                <!-- JavaScript populates this dynamically -->
+                <tr>
+                  <td colspan="7" style="text-align: center; color: var(--text-muted);">No records found.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination Bar -->
+          <div class="pagination">
+            <span class="page-info" id="paginationInfo">Showing 0-0 of 0 registrations</span>
+            <div class="page-controls">
+              <button class="btn btn-secondary" id="btnPrevPage" style="padding: 6px 12px; font-size: 0.85rem; border-radius: 6px;" disabled>Previous</button>
+              <button class="btn btn-secondary" id="btnNextPage" style="padding: 6px 12px; font-size: 0.85rem; border-radius: 6px;" disabled>Next</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- INDIVIDUAL DETAIL DRAWER / MODAL -->
+  <div class="modal-overlay" id="detailModalOverlay">
+    <div class="detail-modal glass-card" id="detailModal">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-glass); padding-bottom: 16px; margin-bottom: 24px;">
+        <h3 style="font-size: 1.5rem; color: var(--primary);">Candidate Registration Sheet</h3>
+        <button class="icon-btn" id="btnCloseDetailModal" style="border-radius: 50%;">✕</button>
+      </div>
+
+      <!-- Candidate Sheet Contents -->
+      <div class="detail-grid" id="detailGrid">
+        <!-- populated by JavaScript -->
+      </div>
+
+      <!-- Admin modification area -->
+      <div style="border-top: 1px solid var(--border-glass); padding-top: 24px; margin-top: 24px;">
+        <h4 style="font-size: 0.95rem; margin-bottom: 16px; color: var(--primary);">Admin Controls</h4>
+        
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="adminStatusSelect" class="form-label">Contact Verification Status</label>
+            <select id="adminStatusSelect" class="form-input">
+              <option value="New">New</option>
+              <option value="Contacted">Contacted</option>
+              <option value="Joined">Joined</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="adminNotes" class="form-label">Internal Follow-up Notes</label>
+          <textarea id="adminNotes" class="notes-area" placeholder="Enter custom interview or follow-up comments..."></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px;">
+          <button class="btn btn-secondary" id="btnCancelDetailSave">Cancel</button>
+          <button class="btn btn-accent" id="btnSaveDetailAdmin">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic Dashboard Logic -->
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>

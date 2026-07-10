@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScaleUp Chennai | Admin Login</title>
+  
+  <link rel="stylesheet" href="style.css?v=1.0.2">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+  <!-- Background Blobs -->
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+  <div class="bg-grid"></div>
+
+  <!-- Main Login Card -->
+  <div class="admin-login-container glass-card" style="position: relative;">
+    <div class="admin-login-header">
+      <div class="logo-icon" style="margin: 0 auto 16px; width: 50px; height: 50px; border-radius: 12px; font-size: 1.5rem;">SU</div>
+      <h2>Admin Portal</h2>
+      <p id="loginSubtitle">Sign in to manage candidate registrations</p>
+    </div>
+
+    <form id="adminLoginForm">
+      <div class="form-group">
+        <label for="username" class="form-label required">Username</label>
+        <input type="text" id="username" class="form-input" placeholder="scaleup" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label required">Password</label>
+        <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;" id="btnLogin">
+        Login Securely
+      </button>
+    </form>
+    
+    <div style="margin-top: 24px;">
+      <a href="index.html" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: underline;">Back to Landing Page</a>
+    </div>
+  </div>
+
+  <!-- Core Scripts -->
+  <script type="module">
+    import { loginAdmin, initRouteGuard } from "./auth.js";
+
+    // Protect administrative page (if logged in, redirect to dashboard)
+    initRouteGuard('admin');
+
+    const form = document.getElementById("adminLoginForm");
+    const btnLogin = document.getElementById("btnLogin");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      const user = document.getElementById("username").value.trim();
+      const pass = document.getElementById("password").value;
+      
+      // Update UI button to loading state
+      btnLogin.disabled = true;
+      btnLogin.innerHTML = "Authenticating...";
+
+      try {
+        console.log(`[Admin Portal] Submission trigger for username: ${user}`);
+        await loginAdmin(user, pass);
+      } catch (error) {
+        // Reset UI button state
+        btnLogin.disabled = false;
+        btnLogin.innerHTML = "Login Securely";
+      }
+    });
+  </script>
+</body>
+</html>

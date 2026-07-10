@@ -1,0 +1,319 @@
+/* Responsive Breakpoints & Mobile Optimization */
+
+/* Tablets & Small Desktops (1024px and below) */
+@media (max-width: 1024px) {
+  .hero-grid {
+    gap: 40px;
+  }
+  
+  .hero-headline {
+    font-size: 3.2rem;
+  }
+  
+  .hero-subheadline {
+    font-size: 1.4rem;
+  }
+  
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .charts-row-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .admin-layout {
+    grid-template-columns: 220px 1fr;
+  }
+}
+
+/* Tablets & Mobile Devices (768px and below) */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 70px;
+  }
+
+  /* Navigation Drawer for Mobile */
+  .nav-links {
+    position: fixed;
+    top: var(--header-height);
+    left: -100%;
+    width: 280px;
+    height: calc(100vh - var(--header-height));
+    background: rgba(7, 27, 53, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-right: 1px solid var(--border-glass);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px 24px;
+    gap: 24px;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 99;
+  }
+
+  [data-theme="light"] .nav-links {
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .nav-links.active {
+    left: 0;
+  }
+
+  /* Hamburger Menu Button */
+  .hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    z-index: 101;
+    color: var(--text-primary);
+  }
+
+  .hamburger-line {
+    width: 24px;
+    height: 2px;
+    background-color: currentColor;
+    transition: var(--transition);
+  }
+
+  .hamburger-btn.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger-btn.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger-btn.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  /* Layout changes */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .hero-content {
+    align-items: center;
+  }
+
+  .hero-brand {
+    justify-content: center;
+  }
+
+  .hero-badge-glow {
+    align-self: center;
+  }
+
+  .hero-headline {
+    font-size: 2.6rem;
+  }
+
+  .hero-subheadline {
+    font-size: 1.25rem;
+  }
+
+  .hero-desc {
+    margin: 0 auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .benefits-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* Form & Register layout changes */
+  .registration-container {
+    padding: 24px 16px;
+    margin-top: 90px;
+  }
+
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .step-labels {
+    display: none; /* Hide labels to save space, rely on numeric progress */
+  }
+
+  .step-indicator {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+
+  /* Admin Dashboard Mobile layout (collapsible sidebar) */
+  .admin-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 260px;
+    height: 100vh;
+    z-index: 105;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 104;
+    display: none;
+  }
+
+  .sidebar-overlay.active {
+    display: block;
+  }
+
+  .main-content {
+    padding: 24px 16px;
+  }
+
+  .dashboard-header {
+    margin-bottom: 24px;
+  }
+
+  .menu-toggle-btn {
+    display: flex !important;
+  }
+
+  .charts-row-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-item.full-width {
+    grid-column: span 1;
+  }
+}
+
+/* Small Mobile Devices (480px and below) */
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .hero-headline {
+    font-size: 2.1rem;
+  }
+
+  .hero-subheadline {
+    font-size: 1.1rem;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+  }
+
+  .btn {
+    padding: 10px 22px;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .btn-hero-cta, .btn-hero-secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .success-modal {
+    padding: 24px 16px;
+  }
+
+  .checkmark-circle {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+
+  .receipt-slip {
+    padding: 14px;
+  }
+
+  .receipt-row {
+    font-size: 0.8rem;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    max-width: 100%;
+  }
+
+  .filter-options {
+    width: 100%;
+  }
+
+  .filter-select {
+    flex-grow: 1;
+  }
+
+  .floating-register-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .back-to-top-btn {
+    bottom: 80px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+}

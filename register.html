@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScaleUp Chennai | Candidate Registration</title>
+  
+  <link rel="stylesheet" href="style.css?v=1.0.2">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress"></div>
+
+  <!-- Background Blobs -->
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+  <div class="bg-grid"></div>
+
+  <!-- Header -->
+  <header class="scrolled">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">SU</div>
+        <div class="logo-text">
+          <span class="logo-title">ScaleUp Chennai</span>
+          <span class="logo-subtitle">Digital Marketing Academy</span>
+        </div>
+      </a>
+      
+      <div class="nav-actions">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle-btn" aria-label="Toggle Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+        </button>
+        
+        <a href="index.html" class="btn btn-secondary">Back to Home</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Registration Card Container -->
+  <div class="registration-container glass-card">
+    <div class="autosave-indicator">
+      <div class="autosave-dot"></div>
+      <span>Form Progress Auto-Saved</span>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="progress-header">
+      <div class="progress-steps">
+        <div class="step-indicator active" id="ind-1">1</div>
+        <div class="step-indicator" id="ind-2">2</div>
+        <div class="step-indicator" id="ind-3">3</div>
+        <div class="step-indicator" id="ind-4">4</div>
+      </div>
+      <div class="step-labels">
+        <div class="step-label active">Personal</div>
+        <div class="step-label">Education</div>
+        <div class="step-label">Career</div>
+        <div class="step-label">Review</div>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+      </div>
+    </div>
+
+    <!-- Main Multi-step Form -->
+    <form id="registrationForm" novalidate>
+      
+      <!-- STEP 1: Personal Details -->
+      <div class="form-step active" id="step-1">
+        <h3 class="step-title">Personal Details</h3>
+        
+        <!-- Registration ID (Read Only) -->
+        <div class="form-group">
+          <label class="form-label">Registration ID</label>
+          <input type="text" id="regNumber" class="form-input" style="color: var(--accent); font-weight: bold; background: rgba(255,255,255,0.05);" readonly value="Generating ID...">
+          <small style="color: var(--text-muted);">This ID is generated automatically using the current period prefix.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="fullName" class="form-label required">Full Name</label>
+          <input type="text" id="fullName" class="form-input" placeholder="Enter your full name" required>
+          <span class="validation-msg" id="err-fullName"></span>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="mobile" class="form-label required">Mobile Number</label>
+            <input type="tel" id="mobile" class="form-input" placeholder="10-digit number" maxlength="10" required>
+            <span class="validation-msg" id="err-mobile"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="whatsapp" class="form-label required">WhatsApp Number</label>
+            <input type="tel" id="whatsapp" class="form-input" placeholder="10-digit number" maxlength="10" required>
+            <span class="validation-msg" id="err-whatsapp"></span>
+            <label class="option-btn" style="margin-top: 8px;">
+              <input type="checkbox" id="sameAsMobile"> Same as Mobile Number
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label required">Email Address</label>
+          <input type="email" id="email" class="form-input" placeholder="example@email.com" required>
+          <span class="validation-msg" id="err-email"></span>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label required">Gender</label>
+            <div class="radio-group">
+              <label class="option-btn"><input type="radio" name="gender" value="Male" required> Male</label>
+              <label class="option-btn"><input type="radio" name="gender" value="Female"> Female</label>
+              <label class="option-btn"><input type="radio" name="gender" value="Other"> Other</label>
+              <label class="option-btn"><input type="radio" name="gender" value="Prefer not to say"> Prefer not to say</label>
+            </div>
+            <span class="validation-msg" id="err-gender"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required">Age Group</label>
+            <div class="radio-group">
+              <label class="option-btn"><input type="radio" name="age" value="Below 18" required> Below 18</label>
+              <label class="option-btn"><input type="radio" name="age" value="18–21"> 18–21</label>
+              <label class="option-btn"><input type="radio" name="age" value="22–25"> 22–25</label>
+              <label class="option-btn"><input type="radio" name="age" value="26–30"> 26–30</label>
+              <label class="option-btn"><input type="radio" name="age" value="31+"> 31+</label>
+            </div>
+            <span class="validation-msg" id="err-age"></span>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="locality" class="form-label required">Locality / Area</label>
+            <input type="text" id="locality" class="form-input" placeholder="e.g. Guindy" required>
+            <span class="validation-msg" id="err-locality"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="pinCode" class="form-label required">PIN Code</label>
+            <input type="text" id="pinCode" class="form-input" placeholder="6-digit code" maxlength="6" required>
+            <span class="validation-msg" id="err-pinCode"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Education Details -->
+      <div class="form-step" id="step-2">
+        <h3 class="step-title">Education Details</h3>
+
+        <div class="form-group">
+          <label for="highestQualification" class="form-label required">Highest Qualification</label>
+          <select id="highestQualification" class="form-input" required>
+            <option value="">Select Qualification</option>
+            <option value="School Student">School Student</option>
+            <option value="10th Pass">10th Pass</option>
+            <option value="12th Pass">12th Pass</option>
+            <option value="Diploma">Diploma</option>
+            <option value="Undergraduate">Undergraduate</option>
+            <option value="Postgraduate">Postgraduate</option>
+            <option value="Other">Other</option>
+          </select>
+          <span class="validation-msg" id="err-highestQualification"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="courseStudying" class="form-label required">Course / Stream Studying</label>
+          <select id="courseStudying" class="form-input" required>
+            <option value="">Select Course Status</option>
+            <option value="Not Studying">Not Studying</option>
+            <option value="11th Standard">11th Standard</option>
+            <option value="12th Standard">12th Standard</option>
+            <option value="Diploma">Diploma</option>
+            <option value="B.A.">B.A.</option>
+            <option value="B.Sc.">B.Sc.</option>
+            <option value="B.Com.">B.Com.</option>
+            <option value="BBA">BBA</option>
+            <option value="BCA">BCA</option>
+            <option value="B.E. / B.Tech.">B.E. / B.Tech.</option>
+            <option value="M.A.">M.A.</option>
+            <option value="M.Sc.">M.Sc.</option>
+            <option value="M.Com.">M.Com.</option>
+            <option value="MBA">MBA</option>
+            <option value="MCA">MCA</option>
+            <option value="Other">Other</option>
+          </select>
+          <span class="validation-msg" id="err-courseStudying"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="major" class="form-label">Major / Specialization</label>
+          <input type="text" id="major" class="form-input" placeholder="e.g. Computer Science (Leave blank if N/A)">
+        </div>
+
+        <div class="form-group">
+          <label for="college" class="form-label">College / School Name</label>
+          <input type="text" id="college" class="form-input" placeholder="Enter institution name">
+        </div>
+      </div>
+
+      <!-- STEP 3: Career Details & Training Preference -->
+      <div class="form-step" id="step-3">
+        <h3 class="step-title">Career & Course Preferences</h3>
+
+        <div class="form-group">
+          <label for="status" class="form-label required">Current Professional Status</label>
+          <select id="status" class="form-input" required>
+            <option value="">Select Status</option>
+            <option value="School Student">School Student</option>
+            <option value="College Student">College Student</option>
+            <option value="Fresher">Fresher</option>
+            <option value="Job Seeker">Job Seeker</option>
+            <option value="Working Professional">Working Professional</option>
+            <option value="Career Restarter">Career Restarter</option>
+            <option value="Business Owner">Business Owner</option>
+          </select>
+          <span class="validation-msg" id="err-status"></span>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label required">Do you own a Laptop/Desktop?</label>
+            <div class="radio-row">
+              <label class="option-btn"><input type="radio" name="laptop" value="Yes" required> Yes</label>
+              <label class="option-btn"><input type="radio" name="laptop" value="No"> No</label>
+            </div>
+            <span class="validation-msg" id="err-laptop"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required">Do you have a Smartphone with Internet?</label>
+            <div class="radio-row">
+              <label class="option-btn"><input type="radio" name="smartphone" value="Yes" required> Yes</label>
+              <label class="option-btn"><input type="radio" name="smartphone" value="No"> No</label>
+            </div>
+            <span class="validation-msg" id="err-smartphone"></span>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label required">Preferred Training Mode</label>
+            <div class="radio-row">
+              <label class="option-btn"><input type="radio" name="trainingMode" value="Online" required> Online</label>
+              <label class="option-btn"><input type="radio" name="trainingMode" value="Offline"> Offline</label>
+              <label class="option-btn"><input type="radio" name="trainingMode" value="Either"> Either</label>
+            </div>
+            <span class="validation-msg" id="err-trainingMode"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required">Preferred Language</label>
+            <div class="radio-row">
+              <label class="option-btn"><input type="radio" name="language" value="English" required> English</label>
+              <label class="option-btn"><input type="radio" name="language" value="Tamil"> Tamil</label>
+              <label class="option-btn"><input type="radio" name="language" value="Both"> Both</label>
+            </div>
+            <span class="validation-msg" id="err-language"></span>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label required">Interested in a Paid Internship?</label>
+            <div class="radio-row">
+              <label class="option-btn"><input type="radio" name="internship" value="Yes" required> Yes</label>
+              <label class="option-btn"><input type="radio" name="internship" value="No"> No</label>
+            </div>
+            <span class="validation-msg" id="err-internship"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required">Looking for Placement Assistance?</label>
+            <div class="radio-row">
+              <label class="option-btn"><input type="radio" name="placement" value="Yes" required> Yes</label>
+              <label class="option-btn"><input type="radio" name="placement" value="No"> No</label>
+            </div>
+            <span class="validation-msg" id="err-placement"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: Reason & Declaration -->
+      <div class="form-step" id="step-4">
+        <h3 class="step-title">Reasoning & Confirmation</h3>
+
+        <div class="form-group">
+          <label for="reason" class="form-label required">Reason for Joining training</label>
+          <textarea id="reason" class="form-input" rows="5" placeholder="Explain why you wish to join this program. Min 20, max 500 characters." required></textarea>
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">
+            <span class="validation-msg" id="err-reason"></span>
+            <span id="charCount">0 / 500 characters</span>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 30px; padding: 20px; background: rgba(0,212,255,0.03); border-radius: 8px; border: 1px dashed var(--border-glass);">
+          <label class="option-btn">
+            <input type="checkbox" id="declaration" required>
+            <span style="font-size: 0.9rem; line-height: 1.4; color: var(--text-secondary);">
+              I confirm that the information provided is true and agree to follow the program guidelines.
+            </span>
+          </label>
+          <span class="validation-msg" id="err-declaration"></span>
+        </div>
+      </div>
+
+      <!-- Actions Row -->
+      <div class="form-actions-row">
+        <button type="button" class="btn btn-secondary" id="btnPrev" style="visibility: hidden;">Back</button>
+        <button type="button" class="btn btn-accent" id="btnNext">Continue</button>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- SUCCESS POPUP MODAL -->
+  <div class="modal-overlay" id="successModal">
+    <div class="success-modal glass-card">
+      <div class="checkmark-circle">✓</div>
+      <h2>Registration Successful!</h2>
+      <p>Your details have been saved in the database. Please download or print your slip below.</p>
+      
+      <!-- Receipt Card details -->
+      <div class="receipt-slip">
+        <div class="receipt-row">
+          <span class="receipt-label">Registration ID</span>
+          <span class="receipt-value" id="slipRegNumber" style="color: var(--accent); font-weight: bold;"></span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-label">Full Name</span>
+          <span class="receipt-value" id="slipName"></span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-label">Mobile Number</span>
+          <span class="receipt-value" id="slipMobile"></span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-label">Training Preference</span>
+          <span class="receipt-value" id="slipMode"></span>
+        </div>
+      </div>
+      
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <button class="btn btn-accent" id="btnDownloadSlip">Download Registration Slip</button>
+        <button class="btn btn-secondary" id="btnReturnHome">Return Home</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Modules -->
+  <script type="module">
+    import { 
+      db, 
+      collection, 
+      doc, 
+      setDoc, 
+      writeBatch, 
+      runTransaction, 
+      serverTimestamp,
+      query,
+      where,
+      getDocs
+    } from "./firebase.js";
+    import { 
+      showToast, 
+      sanitizeInput, 
+      saveFormProgress, 
+      loadFormProgress, 
+      clearFormProgress, 
+      printRegistrationSlip 
+    } from "./utils.js";
+
+    // Application state variables
+    let currentStep = 1;
+    const totalSteps = 4;
+    const STORAGE_KEY = "scaleup_registration_draft";
+    
+    // Page load setup
+    document.addEventListener("DOMContentLoaded", () => {
+      initTheme();
+      initAutocompleteRegId();
+      restoreSavedDraft();
+      setupFormListeners();
+      updateStepUI();
+    });
+
+    // Theme toggling for registration page
+    function initTheme() {
+      const themeToggleBtn = document.querySelector(".theme-toggle-btn");
+      const currentTheme = localStorage.getItem("theme") || "dark";
+      document.documentElement.setAttribute("data-theme", currentTheme);
+      
+      themeToggleBtn.addEventListener("click", () => {
+        const activeTheme = document.documentElement.getAttribute("data-theme");
+        const newTheme = activeTheme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+      });
+    }
+
+    // Auto-generate tentative ID prefix based on current date
+    function initAutocompleteRegId() {
+      const date = new Date();
+      const yy = date.getFullYear().toString().substring(2);
+      const mm = (date.getMonth() + 1).toString().padStart(2, '0');
+      document.getElementById("regNumber").value = `SU-${yy}${mm}#### (Generated On Submit)`;
+    }
+
+    // Form Navigation and steps management
+    const btnNext = document.getElementById("btnNext");
+    const btnPrev = document.getElementById("btnPrev");
+    
+    btnPrev.addEventListener("click", () => {
+      if (currentStep > 1) {
+        currentStep--;
+        updateStepUI();
+      }
+    });
+
+    btnNext.addEventListener("click", async () => {
+      if (currentStep < totalSteps) {
+        // Validate fields in current step before moving forward
+        if (validateStep(currentStep)) {
+          currentStep++;
+          updateStepUI();
+        } else {
+          showToast("Please correct validation errors on the current page.", "warning");
+        }
+      } else {
+        // Step 4: Submission
+        if (validateStep(4)) {
+          await submitForm();
+        } else {
+          showToast("Please complete requirements before registering.", "warning");
+        }
+      }
+    });
+
+    function updateStepUI() {
+      // Show/Hide steps
+      document.querySelectorAll(".form-step").forEach((step, idx) => {
+        if (idx + 1 === currentStep) {
+          step.classList.add("active");
+        } else {
+          step.classList.remove("active");
+        }
+      });
+
+      // Update progress tracker visual
+      document.querySelectorAll(".step-indicator").forEach((ind, idx) => {
+        const stepNum = idx + 1;
+        ind.className = "step-indicator";
+        if (stepNum === currentStep) {
+          ind.classList.add("active");
+        } else if (stepNum < currentStep) {
+          ind.classList.add("completed");
+          ind.innerHTML = "✓";
+        } else {
+          ind.innerHTML = stepNum;
+        }
+      });
+
+      document.querySelectorAll(".step-label").forEach((lbl, idx) => {
+        if (idx + 1 === currentStep) {
+          lbl.classList.add("active");
+        } else {
+          lbl.classList.remove("active");
+        }
+      });
+
+      // Fill progress bar width
+      const fillPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+      document.getElementById("progressBarFill").style.width = fillPercentage + "%";
+
+      // Configure Action Buttons
+      btnPrev.style.visibility = currentStep === 1 ? "hidden" : "visible";
+      btnNext.innerHTML = currentStep === totalSteps ? "Submit Registration" : "Continue";
+      
+      if (currentStep === totalSteps) {
+        btnNext.className = "btn btn-accent";
+        btnNext.disabled = !document.getElementById("declaration").checked;
+      } else {
+        btnNext.className = "btn btn-primary";
+        btnNext.disabled = false;
+      }
+    }
+
+    // Auto-save form inputs to LocalStorage
+    function setupFormListeners() {
+      const inputs = document.querySelectorAll(".form-input, input[type='radio'], input[type='checkbox']");
+      inputs.forEach(input => {
+        input.addEventListener("input", () => {
+          saveCurrentDraft();
+          validateField(input);
+        });
+        input.addEventListener("change", () => {
+          saveCurrentDraft();
+          validateField(input);
+        });
+      });
+
+      // Same as Mobile WhatsApp Checkbox trigger
+      const sameAsMobile = document.getElementById("sameAsMobile");
+      sameAsMobile.addEventListener("change", () => {
+        const mobile = document.getElementById("mobile").value;
+        const whatsappInput = document.getElementById("whatsapp");
+        if (sameAsMobile.checked) {
+          whatsappInput.value = mobile;
+          whatsappInput.readOnly = true;
+          validateField(whatsappInput);
+        } else {
+          whatsappInput.readOnly = false;
+        }
+        saveCurrentDraft();
+      });
+
+      // Sync mobile input if Same As checkbox is checked
+      document.getElementById("mobile").addEventListener("input", (e) => {
+        if (sameAsMobile.checked) {
+          document.getElementById("whatsapp").value = e.target.value;
+          validateField(document.getElementById("whatsapp"));
+        }
+      });
+
+      // Declaration state controls Register button state
+      const decl = document.getElementById("declaration");
+      decl.addEventListener("change", () => {
+        if (currentStep === totalSteps) {
+          btnNext.disabled = !decl.checked;
+        }
+      });
+
+      // Character count tracker
+      const reason = document.getElementById("reason");
+      reason.addEventListener("input", () => {
+        document.getElementById("charCount").innerText = `${reason.value.length} / 500 characters`;
+      });
+    }
+
+    function saveCurrentDraft() {
+      const genderActive = document.querySelector("input[name='gender']:checked")?.value || "";
+      const ageActive = document.querySelector("input[name='age']:checked")?.value || "";
+      const laptopActive = document.querySelector("input[name='laptop']:checked")?.value || "";
+      const smartphoneActive = document.querySelector("input[name='smartphone']:checked")?.value || "";
+      const modeActive = document.querySelector("input[name='trainingMode']:checked")?.value || "";
+      const langActive = document.querySelector("input[name='language']:checked")?.value || "";
+      const internshipActive = document.querySelector("input[name='internship']:checked")?.value || "";
+      const placementActive = document.querySelector("input[name='placement']:checked")?.value || "";
+
+      const draft = {
+        fullName: document.getElementById("fullName").value,
+        mobile: document.getElementById("mobile").value,
+        whatsapp: document.getElementById("whatsapp").value,
+        sameAsMobile: document.getElementById("sameAsMobile").checked,
+        email: document.getElementById("email").value,
+        gender: genderActive,
+        age: ageActive,
+        locality: document.getElementById("locality").value,
+        pinCode: document.getElementById("pinCode").value,
+        highestQualification: document.getElementById("highestQualification").value,
+        courseStudying: document.getElementById("courseStudying").value,
+        major: document.getElementById("major").value,
+        college: document.getElementById("college").value,
+        status: document.getElementById("status").value,
+        laptop: laptopActive,
+        smartphone: smartphoneActive,
+        trainingMode: modeActive,
+        language: langActive,
+        internship: internshipActive,
+        placement: placementActive,
+        reason: document.getElementById("reason").value
+      };
+      saveFormProgress(STORAGE_KEY, draft);
+    }
+
+    function restoreSavedDraft() {
+      const draft = loadFormProgress(STORAGE_KEY);
+      if (!draft) return;
+
+      document.getElementById("fullName").value = draft.fullName || "";
+      document.getElementById("mobile").value = draft.mobile || "";
+      document.getElementById("whatsapp").value = draft.whatsapp || "";
+      document.getElementById("sameAsMobile").checked = draft.sameAsMobile || false;
+      if (draft.sameAsMobile) {
+        document.getElementById("whatsapp").readOnly = true;
+      }
+      document.getElementById("email").value = draft.email || "";
+      
+      if (draft.gender) {
+        const rad = document.querySelector(`input[name='gender'][value='${draft.gender}']`);
+        if (rad) rad.checked = true;
+      }
+      if (draft.age) {
+        const rad = document.querySelector(`input[name='age'][value='${draft.age}']`);
+        if (rad) rad.checked = true;
+      }
+      document.getElementById("locality").value = draft.locality || "";
+      document.getElementById("pinCode").value = draft.pinCode || "";
+      
+      document.getElementById("highestQualification").value = draft.highestQualification || "";
+      document.getElementById("courseStudying").value = draft.courseStudying || "";
+      document.getElementById("major").value = draft.major || "";
+      document.getElementById("college").value = draft.college || "";
+      
+      document.getElementById("status").value = draft.status || "";
+      
+      if (draft.laptop) {
+        const rad = document.querySelector(`input[name='laptop'][value='${draft.laptop}']`);
+        if (rad) rad.checked = true;
+      }
+      if (draft.smartphone) {
+        const rad = document.querySelector(`input[name='smartphone'][value='${draft.smartphone}']`);
+        if (rad) rad.checked = true;
+      }
+      if (draft.trainingMode) {
+        const rad = document.querySelector(`input[name='trainingMode'][value='${draft.trainingMode}']`);
+        if (rad) rad.checked = true;
+      }
+      if (draft.language) {
+        const rad = document.querySelector(`input[name='language'][value='${draft.language}']`);
+        if (rad) rad.checked = true;
+      }
+      if (draft.internship) {
+        const rad = document.querySelector(`input[name='internship'][value='${draft.internship}']`);
+        if (rad) rad.checked = true;
+      }
+      if (draft.placement) {
+        const rad = document.querySelector(`input[name='placement'][value='${draft.placement}']`);
+        if (rad) rad.checked = true;
+      }
+      
+      document.getElementById("reason").value = draft.reason || "";
+      document.getElementById("charCount").innerText = `${(draft.reason || "").length} / 500 characters`;
+    }
+
+    // Interactive Field Validations
+    function validateField(input) {
+      const id = input.id;
+      let isValid = true;
+      let errorMsg = "";
+
+      if (id === "fullName") {
+        const val = input.value.trim();
+        if (val.length === 0) {
+          isValid = false;
+          errorMsg = "Full Name is required.";
+        } else if (val.length < 3) {
+          isValid = false;
+          errorMsg = "Name must be at least 3 characters.";
+        }
+      }
+
+      else if (id === "mobile") {
+        const val = input.value.trim();
+        if (val.length === 0) {
+          isValid = false;
+          errorMsg = "Mobile number is required.";
+        } else if (!/^\d{10}$/.test(val)) {
+          isValid = false;
+          errorMsg = "Must be exactly 10 digits.";
+        }
+      }
+
+      else if (id === "whatsapp") {
+        const val = input.value.trim();
+        if (val.length === 0) {
+          isValid = false;
+          errorMsg = "WhatsApp number is required.";
+        } else if (!/^\d{10}$/.test(val)) {
+          isValid = false;
+          errorMsg = "Must be exactly 10 digits.";
+        }
+      }
+
+      else if (id === "email") {
+        const val = input.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (val.length === 0) {
+          isValid = false;
+          errorMsg = "Email is required.";
+        } else if (!emailRegex.test(val)) {
+          isValid = false;
+          errorMsg = "Please enter a valid email address.";
+        }
+      }
+
+      else if (id === "locality") {
+        if (input.value.trim().length === 0) {
+          isValid = false;
+          errorMsg = "Locality is required.";
+        }
+      }
+
+      else if (id === "pinCode") {
+        const val = input.value.trim();
+        if (val.length === 0) {
+          isValid = false;
+          errorMsg = "PIN Code is required.";
+        } else if (!/^\d{6}$/.test(val)) {
+          isValid = false;
+          errorMsg = "Must be exactly 6 digits.";
+        }
+      }
+
+      else if (id === "highestQualification" || id === "courseStudying" || id === "status") {
+        if (input.value === "") {
+          isValid = false;
+          errorMsg = "Field selection is required.";
+        }
+      }
+
+      else if (id === "reason") {
+        const val = input.value.trim();
+        if (val.length < 20) {
+          isValid = false;
+          errorMsg = `Minimum 20 characters required. (Current: ${val.length})`;
+        } else if (val.length > 500) {
+          isValid = false;
+          errorMsg = "Maximum 500 characters allowed.";
+        }
+      }
+
+      // Handle visuals
+      const errorSpan = document.getElementById(`err-${id}`);
+      if (errorSpan) {
+        if (!isValid) {
+          input.classList.add("invalid");
+          input.classList.remove("valid");
+          errorSpan.innerText = errorMsg;
+          errorSpan.className = "validation-msg error-msg";
+        } else {
+          input.classList.remove("invalid");
+          input.classList.add("valid");
+          errorSpan.innerText = "Looks good!";
+          errorSpan.className = "validation-msg success-msg";
+        }
+      }
+
+      return isValid;
+    }
+
+    // Step-by-step validator
+    function validateStep(step) {
+      let isStepValid = true;
+
+      if (step === 1) {
+        const fields = ["fullName", "mobile", "whatsapp", "email", "locality", "pinCode"];
+        fields.forEach(f => {
+          const inp = document.getElementById(f);
+          if (!validateField(inp)) isStepValid = false;
+        });
+
+        // Radios
+        const gender = document.querySelector("input[name='gender']:checked");
+        const genderErr = document.getElementById("err-gender");
+        if (!gender) {
+          isStepValid = false;
+          genderErr.innerText = "Please select your gender.";
+          genderErr.className = "validation-msg error-msg";
+        } else {
+          genderErr.className = "validation-msg";
+        }
+
+        const age = document.querySelector("input[name='age']:checked");
+        const ageErr = document.getElementById("err-age");
+        if (!age) {
+          isStepValid = false;
+          ageErr.innerText = "Please select your age group.";
+          ageErr.className = "validation-msg error-msg";
+        } else {
+          ageErr.className = "validation-msg";
+        }
+      }
+
+      else if (step === 2) {
+        const fields = ["highestQualification", "courseStudying"];
+        fields.forEach(f => {
+          const inp = document.getElementById(f);
+          if (!validateField(inp)) isStepValid = false;
+        });
+      }
+
+      else if (step === 3) {
+        const fields = ["status"];
+        fields.forEach(f => {
+          const inp = document.getElementById(f);
+          if (!validateField(inp)) isStepValid = false;
+        });
+
+        // Binary choices validation
+        const pairs = ["laptop", "smartphone", "trainingMode", "language", "internship", "placement"];
+        pairs.forEach(p => {
+          const selected = document.querySelector(`input[name='${p}']:checked`);
+          const errSpan = document.getElementById(`err-${p}`);
+          if (!selected) {
+            isStepValid = false;
+            if (errSpan) {
+              errSpan.innerText = "Selection is required.";
+              errSpan.className = "validation-msg error-msg";
+            }
+          } else {
+            if (errSpan) errSpan.className = "validation-msg";
+          }
+        });
+      }
+
+      else if (step === 4) {
+        const reason = document.getElementById("reason");
+        if (!validateField(reason)) isStepValid = false;
+
+        const decl = document.getElementById("declaration");
+        const declErr = document.getElementById("err-declaration");
+        if (!decl.checked) {
+          isStepValid = false;
+          declErr.innerText = "Please accept the declaration.";
+          declErr.className = "validation-msg error-msg";
+        } else {
+          declErr.className = "validation-msg";
+        }
+      }
+
+      return isStepValid;
+    }
+
+    // Submit registration payload
+    async function submitForm() {
+      // Double check all validations
+      if (!validateStep(1) || !validateStep(2) || !validateStep(3) || !validateStep(4)) {
+        showToast("Form validation failed. Please check details.", "error");
+        return;
+      }
+
+      // Add a loading overlay
+      const loader = document.createElement("div");
+      loader.className = "loader-overlay";
+      loader.innerHTML = '<div class="loader"></div>';
+      document.body.appendChild(loader);
+
+      const emailVal = document.getElementById("email").value.trim().toLowerCase();
+      const mobileVal = document.getElementById("mobile").value.trim();
+
+      const date = new Date();
+      const yy = date.getFullYear().toString().substring(2);
+      const mm = (date.getMonth() + 1).toString().padStart(2, '0');
+      const counterDocId = `${yy}${mm}`;
+
+
+
+      try {
+        // Enforce uniqueness constraints before creating the document
+        // Query to check if email already exists
+        const emailQuery = query(collection(db, "uniqueEmails"), where("__name__", "==", emailVal));
+        const emailSnap = await getDocs(emailQuery);
+        if (!emailSnap.empty) {
+          loader.remove();
+          showToast("A user with this email address is already registered.", "error");
+          return;
+        }
+
+        // Query to check if mobile already exists
+        const mobileQuery = query(collection(db, "uniqueMobiles"), where("__name__", "==", mobileVal));
+        const mobileSnap = await getDocs(mobileQuery);
+        if (!mobileSnap.empty) {
+          loader.remove();
+          showToast("A user with this mobile number is already registered.", "error");
+          return;
+        }
+
+        // Run Transaction to fetch ID and increment monthly counter securely
+        const counterRef = doc(db, "registrationCounter", counterDocId);
+        
+        let registrationIdNumber;
+        
+        await runTransaction(db, async (transaction) => {
+          const counterDoc = await transaction.get(counterRef);
+          
+          let lastNumber = 1;
+          if (counterDoc.exists()) {
+            lastNumber = counterDoc.data().lastNumber + 1;
+            transaction.update(counterRef, { lastNumber: lastNumber });
+          } else {
+            transaction.set(counterRef, { lastNumber: 1 });
+          }
+          
+          // Format as YYMM#### e.g., 26070001
+          const formattedSeq = lastNumber.toString().padStart(4, '0');
+          registrationIdNumber = parseInt(`${counterDocId}${formattedSeq}`);
+        });
+
+        // Package Form details
+        const regData = {
+          registrationNumber: registrationIdNumber,
+          fullName: sanitizeInput(document.getElementById("fullName").value),
+          mobile: sanitizeInput(mobileVal),
+          whatsapp: sanitizeInput(document.getElementById("whatsapp").value),
+          email: sanitizeInput(emailVal),
+          gender: document.querySelector("input[name='gender']:checked").value,
+          age: document.querySelector("input[name='age']:checked").value,
+          locality: sanitizeInput(document.getElementById("locality").value),
+          pinCode: sanitizeInput(document.getElementById("pinCode").value),
+          highestQualification: document.getElementById("highestQualification").value,
+          courseStudying: document.getElementById("courseStudying").value,
+          major: sanitizeInput(document.getElementById("major").value),
+          college: sanitizeInput(document.getElementById("college").value),
+          status: document.getElementById("status").value,
+          laptop: document.querySelector("input[name='laptop']:checked").value,
+          smartphone: document.querySelector("input[name='smartphone']:checked").value,
+          trainingMode: document.querySelector("input[name='trainingMode']:checked").value,
+          language: document.querySelector("input[name='language']:checked").value,
+          internship: document.querySelector("input[name='internship']:checked").value,
+          placement: document.querySelector("input[name='placement']:checked").value,
+          reason: sanitizeInput(document.getElementById("reason").value),
+          createdAt: serverTimestamp(),
+          month: parseInt(mm),
+          year: date.getFullYear(),
+          status: "New" // Default state matching New schema
+        };
+
+        // Write batch: 
+        // 1. Create main registrations document
+        // 2. Register index in uniqueEmails
+        // 3. Register index in uniqueMobiles
+        const batch = writeBatch(db);
+        const newRegRef = doc(collection(db, "registrations"));
+        
+        batch.set(newRegRef, regData);
+        batch.set(doc(db, "uniqueEmails", emailVal), { regId: newRegRef.id });
+        batch.set(doc(db, "uniqueMobiles", mobileVal), { regId: newRegRef.id });
+
+        await batch.commit();
+
+        loader.remove();
+        clearFormProgress(STORAGE_KEY);
+        
+        // Show success pop up
+        showToast("Registration successful!", "success");
+        showSuccessModal(regData);
+
+      } catch (error) {
+        loader.remove();
+        console.error("[Submission Error] Full trace:", error);
+        
+        let msg = "Database write failed.";
+        const errorStr = String(error.message || error);
+        
+        if (errorStr.includes("Permission denied") || error.code === "permission-denied") {
+          msg = "Firestore permission denied. Please verify your Cloud Firestore security rules.";
+
+        } else if (error.code === "unavailable" || errorStr.includes("network")) {
+          msg = "Network error. Please check your internet connection.";
+        } else {
+          msg = `Registration failed: ${error.message || error}`;
+        }
+        
+        showToast(msg, "error");
+      }
+    }
+
+    // Success Modal displays
+    function showSuccessModal(data) {
+      document.getElementById("slipRegNumber").innerText = data.registrationNumber;
+      document.getElementById("slipName").innerText = data.fullName;
+      document.getElementById("slipMobile").innerText = data.mobile;
+      document.getElementById("slipMode").innerText = `${data.trainingMode} (${data.language})`;
+      
+      const successModal = document.getElementById("successModal");
+      successModal.classList.add("active");
+
+      // Bind Print Slip button
+      document.getElementById("btnDownloadSlip").onclick = () => {
+        printRegistrationSlip(data);
+      };
+
+      document.getElementById("btnReturnHome").onclick = () => {
+        successModal.classList.remove("active");
+        window.location.href = "index.html";
+      };
+    }
+  </script>
+</body>
+</html>

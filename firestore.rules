@@ -1,0 +1,44 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if the user is authenticated admin
+    function isAdmin() {
+      return request.auth != null && (
+        request.auth.token.email == 'admin@scaleup.academy' ||
+        request.auth.token.email == 'scaleup@scaleup.in'
+      );
+    }
+
+    // Registrations collection rules
+    match /registrations/{registrationId} {
+      // Admin has full control
+      allow read, update, delete: if isAdmin();
+      // Public can create registrations
+      allow create: if request.resource.data.status == 'active' 
+                    && request.resource.data.registrationNumber != null
+                    && request.resource.data.fullName != null
+                    && request.resource.data.mobile != null;
+    }
+
+    // Monthly registration counter rules
+    match /registrationCounter/{counterId} {
+      // Public must be able to read and write (increment) counters during registration
+      allow read, write: if true;
+    }
+
+    // Unique Email verification collection rules
+    match /uniqueEmails/{email} {
+      // Create is allowed only if email does not exist yet
+      allow create: if !exists(/databases/$(database)/documents/uniqueEmails/$(email));
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Unique Mobile verification collection rules
+    match /uniqueMobiles/{mobile} {
+      // Create is allowed only if mobile does not exist yet
+      allow create: if !exists(/databases/$(database)/documents/uniqueMobiles/$(mobile));
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}
